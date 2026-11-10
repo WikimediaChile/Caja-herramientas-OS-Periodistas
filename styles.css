@@ -183,3 +183,24 @@ body.admin-bar #caja-periodistas .cp-site-header { top: 32px; }
 @media (prefers-reduced-motion: reduce) {
   #caja-periodistas *, #caja-periodistas *::before, #caja-periodistas *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+#caja-periodistas #cp-mobile-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  color: #374151 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+#caja-periodistas #cp-mobile-close svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+  stroke: #374151 !important;
+}
