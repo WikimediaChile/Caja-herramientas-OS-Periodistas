@@ -32,24 +32,27 @@
     </nav>
   </header>
 
-  <nav class="cp-mobile-menu" id="cp-mobile-menu" aria-label="Navegación móvil" hidden>
+  <div class="cp-mobile-menu" id="cp-mobile-menu" role="dialog" aria-modal="true" aria-labelledby="cp-mobile-menu-title" hidden>
     <div class="cp-mobile-heading">
+      <h2 id="cp-mobile-menu-title" class="cp-sr-only">Menú de navegación</h2>
       <img src="https://wikimedia.cl/wp-content/uploads/2025/11/wikiemdia-foundation-logo.png" alt="Wikimedia Chile" width="180" height="36">
       <button type="button" id="cp-mobile-close" aria-label="Cerrar menú">
         <svg aria-hidden="true" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <a href="https://wikimedia.cl/">Inicio</a>
-    <a href="https://wikimedia.cl/sobre-nosotros-wikimedia-chile/">Quiénes Somos</a>
-    <a href="https://wikimedia.cl/programas-wikimedia-chile/">Programas</a>
-    <a href="https://wikimedia.cl/noticias-wikimedia-chile/">Noticias</a>
-    <a href="https://wikimedia.cl/blog-wikimedia-chile/">Blog</a>
-    <a href="https://wikimedia.cl/agenda-wikimedia-chile/">Agenda</a>
-    <div class="cp-mobile-actions">
-      <a class="cp-nav-secondary" href="https://wikimedia.cl/socios/">Hazte Socio/a</a>
-      <a class="cp-nav-primary" href="https://wikimedia.cl/donar-wikimedia-chile/">Donar</a>
-    </div>
-  </nav>
+    <nav class="cp-mobile-links" aria-label="Navegación móvil">
+      <a href="https://wikimedia.cl/">Inicio</a>
+      <a href="https://wikimedia.cl/sobre-nosotros-wikimedia-chile/">Quiénes Somos</a>
+      <a href="https://wikimedia.cl/programas-wikimedia-chile/">Programas</a>
+      <a href="https://wikimedia.cl/noticias-wikimedia-chile/">Noticias</a>
+      <a href="https://wikimedia.cl/blog-wikimedia-chile/">Blog</a>
+      <a href="https://wikimedia.cl/agenda-wikimedia-chile/">Agenda</a>
+      <div class="cp-mobile-actions">
+        <a class="cp-nav-secondary" href="https://wikimedia.cl/socios/">Hazte Socio/a</a>
+        <a class="cp-nav-primary" href="https://wikimedia.cl/donar-wikimedia-chile/">Donar</a>
+      </div>
+    </nav>
+  </div>
 
   <main id="cp-main" class="cp-main">
     <nav class="cp-breadcrumbs cp-container" aria-label="Ruta de navegación">
@@ -82,6 +85,7 @@
           <p>Filtra según el tipo de tarea o busca un recurso específico.</p>
         </div>
         <div class="cp-filter-bar">
+          <p class="cp-filter-hint">Desliza horizontalmente para ver todas las categorías.</p>
           <div class="cp-chips" id="cp-chips" role="group" aria-label="Filtrar herramientas por categoría"></div>
         </div>
         <p class="cp-count" id="cp-count" role="status" aria-live="polite"></p>

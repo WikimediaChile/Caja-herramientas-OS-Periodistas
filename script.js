@@ -124,6 +124,13 @@
       ).join('');
     }
 
+    // Actualizar los botones existentes conserva el foco y permite recorrerlos con Tab.
+    function actualizarFiltros() {
+      chips.querySelectorAll('button[data-categoria]').forEach((boton) => {
+        boton.setAttribute('aria-pressed', String(boton.dataset.categoria === estado.categoria));
+      });
+    }
+
     function renderizarHerramientas() {
       const consulta = normalizar(estado.consulta.trim());
       const resultados = HERRAMIENTAS.filter((herramienta) => {
@@ -145,38 +152,90 @@
           <p>${escapar(herramienta.descripcion)}</p>
           <details><summary>Cómo usarla</summary><p>${escapar(herramienta.uso)}</p></details>
           <div class="cp-card-actions"><a class="cp-tool-link" href="${escapar(herramienta.url)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir ${escapar(herramienta.nombre)} en una pestaña nueva">Abrir sitio <span aria-hidden="true">↗</span></a></div>
-        </article>`).join('') : '<p class="cp-empty">No encontramos herramientas con esa búsqueda. Prueba con otra palabra o quita el filtro.</p>';
+        </article>`).join('') : `
+          <div class="cp-empty">
+            <h3>No encontramos recursos con esa búsqueda</h3>
+            <p>Prueba con otra palabra o vuelve a explorar todas las herramientas.</p>
+            <button type="button" class="cp-reset" id="cp-reset">Ver todos los recursos</button>
+          </div>`;
     }
 
     chips.addEventListener('click', (evento) => {
       const boton = evento.target.closest('button[data-categoria]');
       if (!boton || !chips.contains(boton)) return;
       estado.categoria = boton.dataset.categoria;
-      renderizarFiltros();
+      actualizarFiltros();
       renderizarHerramientas();
     });
     buscar.addEventListener('input', (evento) => {
       estado.consulta = evento.target.value;
       renderizarHerramientas();
     });
+    grilla.addEventListener('click', (evento) => {
+      if (!evento.target.closest('#cp-reset')) return;
+      estado.consulta = '';
+      estado.categoria = 'all';
+      buscar.value = '';
+      actualizarFiltros();
+      renderizarHerramientas();
+      buscar.focus(); // El botón desaparece; devolver el foco a un control útil.
+    });
 
-    // Menú móvil, independiente de los scripts del tema de WordPress.
+    // El menú móvil se comporta como un diálogo: retiene Tab y devuelve el foco al cerrar.
     const botonMenu = raiz.querySelector('#cp-mobile-toggle');
     const menu = raiz.querySelector('#cp-mobile-menu');
     const cerrarMenu = raiz.querySelector('#cp-mobile-close');
-    const alternarMenu = (abierto) => {
+    const marca = raiz.querySelector('.cp-brand');
+    let focoAnterior = null;
+
+    function alternarMenu(abierto, devolverFoco = true) {
+      if (abierto === !menu.hidden) return;
+      if (abierto) focoAnterior = document.activeElement;
       menu.hidden = !abierto;
       botonMenu.setAttribute('aria-expanded', String(abierto));
-      botonMenu.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
-      if (abierto) cerrarMenu.focus(); else botonMenu.focus();
-    };
+      document.body.classList.toggle('wmcl-caja-menu-abierto', abierto);
+      if (abierto) {
+        cerrarMenu.focus();
+      } else if (devolverFoco && focoAnterior && focoAnterior.isConnected) {
+        focoAnterior.focus();
+      }
+    }
+
     botonMenu.addEventListener('click', () => alternarMenu(true));
     cerrarMenu.addEventListener('click', () => alternarMenu(false));
     menu.addEventListener('click', (evento) => {
-      if (evento.target.closest('a')) alternarMenu(false);
+      if (evento.target.closest('a')) alternarMenu(false, false);
     });
-    raiz.addEventListener('keydown', (evento) => {
-      if (evento.key === 'Escape' && !menu.hidden) alternarMenu(false);
+    document.addEventListener('keydown', (evento) => {
+      if (menu.hidden) return;
+      if (evento.key === 'Escape') {
+        evento.preventDefault();
+        alternarMenu(false);
+        return;
+      }
+      if (evento.key !== 'Tab') return;
+      const elementos = Array.from(menu.querySelectorAll('a[href], button:not([disabled])'));
+      if (!elementos.length) return;
+      const primero = elementos[0];
+      const ultimo = elementos[elementos.length - 1];
+      if (evento.shiftKey && (document.activeElement === primero || !menu.contains(document.activeElement))) {
+        evento.preventDefault();
+        ultimo.focus();
+      } else if (!evento.shiftKey && (document.activeElement === ultimo || !menu.contains(document.activeElement))) {
+        evento.preventDefault();
+        primero.focus();
+      }
+    });
+    document.addEventListener('focusin', (evento) => {
+      if (!menu.hidden && !menu.contains(evento.target)) cerrarMenu.focus();
+    });
+    // Evitar que el menú permanezca abierto si cambia a la vista de escritorio.
+    const vistaMovil = window.matchMedia('(max-width: 1050px)');
+    vistaMovil.addEventListener('change', (evento) => {
+      if (!evento.matches && !menu.hidden) {
+        alternarMenu(false, false);
+        marca.focus();
+      }
     });
 
     renderizarFiltros();
