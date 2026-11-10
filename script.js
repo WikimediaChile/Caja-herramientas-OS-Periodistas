@@ -8,32 +8,101 @@
     raiz.dataset.inicializada = 'true';
     document.body.classList.add('wmcl-caja-page');
 
+    // Categorías organizadas según tareas periodísticas (claves estables para los filtros).
     const CATEGORIAS = {
-      ori: 'Orientarte y contextualizar',
-      src: 'Rastrear autoría y fuentes',
-      dat: 'Datos y perfiles',
-      arc: 'Archivo y documentos',
-      img: 'Imágenes y licencias',
-      geo: 'Mapas y ubicación'
+      ori: 'Contextualizar y evaluar fuentes',
+      src: 'Analizar ediciones y visualizaciones',
+      dat: 'Explorar datos y perfiles',
+      arc: 'Consultar archivos y documentos',
+      img: 'Buscar recursos multimedia',
+      geo: 'Explorar mapas y lugares'
     };
 
-    // Contenido de las 14 herramientas conservado del repositorio original.
-    // wikimedia: true = proyecto o herramienta del ecosistema Wikimedia.
     const HERRAMIENTAS = [
-      { id: 'wp', categoria: 'ori', nombre: 'Wikipedia en español', wikimedia: true, descripcion: 'Enciclopedia colaborativa con historial público de cada cambio.', uso: 'Úsala como mapa: parte por las referencias del final. En el menú Herramientas, “Información de la página” muestra cuántas ediciones y editores tiene.', url: 'https://es.wikipedia.org' },
-      { id: 'fn', categoria: 'ori', nombre: 'Guía de fuentes fiables', wikimedia: true, descripcion: 'Criterios de la comunidad para decidir qué fuentes sirven en Wikipedia.', uso: 'Léela para entender por qué una afirmación se mantiene o se elimina, y aplica los mismos criterios a tu reporteo.', url: 'https://es.wikipedia.org/wiki/Wikipedia:Fuentes_fiables' },
-      { id: 'xt', categoria: 'src', nombre: 'XTools', wikimedia: true, descripcion: 'Estadísticas de páginas y editores de los proyectos Wikimedia.', uso: 'Revisa quiénes han editado más un artículo, cuándo se concentraron los cambios y qué cuentas participaron.', url: 'https://xtools.wmcloud.org' },
-      { id: 'pv', categoria: 'src', nombre: 'Pageviews Analysis', wikimedia: true, descripcion: 'Visitas diarias de cualquier artículo de Wikipedia.', uso: 'Compara artículos y busca picos de interés que coincidan con hechos noticiosos.', url: 'https://pageviews.wmcloud.org' },
-      { id: 'wd', categoria: 'dat', nombre: 'Wikidata', wikimedia: true, descripcion: 'Base de datos estructurada de personas, organizaciones, cargos y fechas.', uso: 'Cada dato indica su fuente. Parte desde la ficha de una persona u organización y cruza la información.', url: 'https://www.wikidata.org' },
-      { id: 'wq', categoria: 'dat', nombre: 'Wikidata Query Service', wikimedia: true, descripcion: 'Consultas sobre los datos estructurados de Wikidata.', uso: 'Genera listas que serían lentas de armar a mano. Empieza desde los ejemplos que ofrece el sitio.', url: 'https://query.wikidata.org' },
-      { id: 're', categoria: 'dat', nombre: 'Reasonator', wikimedia: true, descripcion: 'Muestra las fichas de Wikidata en un formato legible.', uso: 'Pega el código de un ítem de Wikidata (por ejemplo, Q123) para leerlo como una ficha ordenada.', url: 'https://reasonator.toolforge.org' },
-      { id: 'sc', categoria: 'dat', nombre: 'Scholia', wikimedia: true, descripcion: 'Perfiles de investigadores, instituciones y publicaciones construidos desde Wikidata.', uso: 'Encuentra especialistas y sus publicaciones cuando buscas voces expertas para una nota.', url: 'https://scholia.toolforge.org' },
-      { id: 'ws', categoria: 'arc', nombre: 'Wikisource', wikimedia: true, descripcion: 'Textos y documentos históricos en dominio público.', uso: 'Consulta documentos completos y cita desde el original, no desde fragmentos.', url: 'https://es.wikisource.org' },
-      { id: 'wb', categoria: 'arc', nombre: 'Wayback Machine', wikimedia: false, descripcion: 'Archivo de versiones antiguas de páginas web, del Internet Archive.', uso: 'Recupera lo que cambió o desapareció y archiva toda página antes de citarla.', url: 'https://archive.org/web/' },
-      { id: 'wc', categoria: 'img', nombre: 'Wikimedia Commons', wikimedia: true, descripcion: 'Repositorio de imágenes, audios y videos con licencias libres.', uso: 'Cada archivo indica su licencia y cómo atribuir al autor. Revisa siempre la página del archivo.', url: 'https://commons.wikimedia.org' },
-      { id: 'wi', categoria: 'img', nombre: 'WISE', wikimedia: true, descripcion: 'Buscador experimental que encuentra medios de Commons según su contenido visual.', uso: 'Describe lo que buscas. En su fase inicial solo indexaba una parte de Commons (“Media of the Day”), así que complementa con la búsqueda de Commons.', url: 'https://wise.wmcloud.org/' },
-      { id: 'ov', categoria: 'img', nombre: 'Openverse', wikimedia: false, descripcion: 'Buscador de imágenes y audios con licencias abiertas.', uso: 'Filtra por licencia y copia la atribución sugerida.', url: 'https://openverse.org' },
-      { id: 'osm', categoria: 'geo', nombre: 'OpenStreetMap', wikimedia: false, descripcion: 'Mapa colaborativo y abierto del mundo, construido por una comunidad de personas voluntarias.', uso: 'Confirma calles, edificios y puntos de referencia para ubicar dónde ocurre un hecho y dar contexto geográfico a tu nota.', url: 'https://www.openstreetmap.org' }
+      {
+        id: 'wp', categoria: 'ori', nombre: 'Wikipedia en español', wikimedia: true,
+        descripcion: 'Enciclopedia libre y colaborativa que permite consultar información, explorar referencias y revisar el historial de edición de sus artículos.',
+        uso: 'Utiliza los artículos como punto de partida para investigar un tema. Revisa las referencias, consulta el historial para conocer qué cambios se han realizado y contrasta los datos con sus fuentes originales.',
+        url: 'https://es.wikipedia.org'
+      },
+      {
+        id: 'fn', categoria: 'ori', nombre: 'Guía de fuentes fiables', wikimedia: true, tipo: 'guia',
+        descripcion: 'Recurso de la comunidad de Wikipedia que explica los criterios utilizados para evaluar la fiabilidad de las fuentes citadas en artículos enciclopédicos.',
+        uso: 'Consulta los criterios sobre fiabilidad, independencia y verificabilidad de las fuentes. Pueden ayudarte a evaluar la información que encuentras en Wikipedia, aunque no reemplazan los estándares de verificación periodística.',
+        url: 'https://es.wikipedia.org/wiki/Wikipedia:Fuentes_fiables'
+      },
+      {
+        id: 'xt', categoria: 'src', nombre: 'XTools', wikimedia: true,
+        descripcion: 'Conjunto de herramientas que permite consultar estadísticas sobre artículos, ediciones y cuentas de usuario en los proyectos Wikimedia.',
+        uso: 'Busca un artículo de Wikipedia para explorar su historial de contribuciones, identificar las cuentas que lo han editado y observar patrones de actividad. Recuerda que una cuenta de usuario no necesariamente identifica a una persona.',
+        url: 'https://xtools.wmcloud.org'
+      },
+      {
+        id: 'pv', categoria: 'src', nombre: 'Pageviews Analysis', wikimedia: true,
+        descripcion: 'Herramienta para analizar y comparar las visualizaciones de páginas de Wikipedia y otros proyectos Wikimedia a lo largo del tiempo.',
+        uso: 'Busca un artículo y selecciona un período para observar sus visualizaciones. Puedes comparar varios artículos e identificar aumentos que coincidan con acontecimientos noticiosos. Las cifras representan visualizaciones, no personas únicas, y no explican por sí solas sus causas.',
+        url: 'https://pageviews.wmcloud.org'
+      },
+      {
+        id: 'wd', categoria: 'dat', nombre: 'Wikidata', wikimedia: true,
+        descripcion: 'Base de conocimiento libre y colaborativa que reúne datos estructurados sobre personas, organizaciones, lugares, acontecimientos y otros temas.',
+        uso: 'Busca una persona, institución o lugar para explorar sus datos, relaciones e identificadores. Revisa las referencias disponibles y contrasta la información con las fuentes originales antes de utilizarla en una investigación.',
+        url: 'https://www.wikidata.org'
+      },
+      {
+        id: 'wq', categoria: 'dat', nombre: 'Wikidata Query Service', wikimedia: true,
+        descripcion: 'Servicio que permite realizar consultas sobre los datos de Wikidata para identificar relaciones, generar listados y explorar información estructurada.',
+        uso: 'Comienza con las consultas de ejemplo disponibles en la plataforma. Puedes adaptarlas para explorar conjuntos de datos, como instituciones de un país o personas que han ocupado determinados cargos. Los resultados dependerán de la información disponible en Wikidata.',
+        url: 'https://query.wikidata.org'
+      },
+      {
+        id: 're', categoria: 'dat', nombre: 'Reasonator', wikimedia: true,
+        descripcion: 'Herramienta que presenta la información de Wikidata en fichas visuales más fáciles de explorar, incluyendo relaciones entre personas, lugares y otros elementos.',
+        uso: 'Busca un elemento de Wikidata o introduce su identificador, como Q123, para visualizar sus datos y relaciones. Utilízala para explorar conexiones y vuelve a Wikidata para revisar las declaraciones y sus referencias.',
+        url: 'https://reasonator.toolforge.org'
+      },
+      {
+        id: 'sc', categoria: 'dat', nombre: 'Scholia', wikimedia: true,
+        descripcion: 'Herramienta que genera perfiles académicos de investigadores, instituciones, publicaciones y temas de investigación a partir de los datos disponibles en Wikidata.',
+        uso: 'Busca especialistas o temas para explorar publicaciones, colaboraciones y áreas de investigación. Puede ayudarte a identificar posibles fuentes expertas, pero sus registros son incompletos y deben contrastarse con otras fuentes académicas.',
+        url: 'https://scholia.toolforge.org'
+      },
+      {
+        id: 'ws', categoria: 'arc', nombre: 'Wikisource', wikimedia: true,
+        descripcion: 'Biblioteca digital colaborativa que reúne obras y documentos publicados, disponibles en dominio público o bajo licencias libres.',
+        uso: 'Busca libros, discursos, cartas y otros textos históricos para consultar sus contenidos. Cuando esté disponible, revisa la reproducción del documento original y comprueba los datos bibliográficos antes de citarlo.',
+        url: 'https://es.wikisource.org'
+      },
+      {
+        id: 'wb', categoria: 'arc', nombre: 'Wayback Machine', wikimedia: false,
+        descripcion: 'Archivo digital de Internet Archive que permite consultar capturas de páginas web realizadas en diferentes momentos.',
+        uso: 'Introduce la dirección de un sitio para buscar versiones anteriores y comparar cambios en su contenido. Puede ser útil para recuperar información modificada o eliminada. Recuerda que no todas las páginas ni todas sus versiones están archivadas.',
+        url: 'https://archive.org/web/'
+      },
+      {
+        id: 'wc', categoria: 'img', nombre: 'Wikimedia Commons', wikimedia: true,
+        descripcion: 'Repositorio colaborativo de imágenes, audios, videos y otros archivos multimedia disponibles bajo licencias libres o en dominio público.',
+        uso: 'Busca fotografías, ilustraciones y otros archivos para acompañar una publicación. Antes de reutilizarlos, revisa su procedencia, autoría, licencia y condiciones de atribución en la página de cada archivo.',
+        url: 'https://commons.wikimedia.org'
+      },
+      {
+        id: 'wi', categoria: 'img', nombre: 'WISE', wikimedia: true,
+        descripcion: 'Buscador experimental que permite encontrar imágenes y videos de Wikimedia Commons mediante descripciones de su contenido visual.',
+        uso: 'Describe en palabras lo que quieres encontrar, por ejemplo, una persona frente a un edificio. La herramienta analiza el contenido visual, pero su cobertura es limitada, por lo que conviene complementar los resultados con la búsqueda de Wikimedia Commons.',
+        url: 'https://wise.wmcloud.org/'
+      },
+      {
+        id: 'ov', categoria: 'img', nombre: 'Openverse', wikimedia: false,
+        descripcion: 'Buscador de imágenes y archivos de audio publicados en Internet bajo licencias Creative Commons o identificados como dominio público.',
+        uso: 'Busca recursos multimedia y utiliza los filtros de licencia según tus necesidades. Antes de publicar, consulta la fuente original para verificar la licencia, la autoría y las condiciones de reutilización.',
+        url: 'https://openverse.org'
+      },
+      {
+        id: 'osm', categoria: 'geo', nombre: 'OpenStreetMap', wikimedia: false,
+        descripcion: 'Proyecto colaborativo de cartografía abierta que reúne información geográfica sobre calles, edificios, rutas y otros elementos del territorio.',
+        uso: 'Explora lugares y puntos de referencia para contextualizar geográficamente una noticia. También puedes consultar detalles del entorno, pero verifica la actualización y exactitud de los datos antes de utilizarlos como evidencia.',
+        url: 'https://www.openstreetmap.org'
+      }
     ];
 
     const buscar = raiz.querySelector('#cp-q');
@@ -64,12 +133,13 @@
         return texto.includes(consulta);
       });
 
-      contador.textContent = `${resultados.length} ${resultados.length === 1 ? 'herramienta' : 'herramientas'}`;
+      contador.textContent = `${resultados.length} ${resultados.length === 1 ? 'recurso' : 'recursos'}`;
       grilla.innerHTML = resultados.length ? resultados.map((herramienta) => `
         <article class="cp-card">
           <div class="cp-card-meta">
-            <span class="cp-tag ${herramienta.wikimedia ? 'cp-tag-wm' : ''}">${herramienta.wikimedia ? 'Ecosistema Wikimedia' : 'Aliada externa'}</span>
+            <span class="cp-tag ${herramienta.wikimedia ? 'cp-tag-wm' : ''}">${herramienta.wikimedia ? 'Ecosistema Wikimedia' : 'Herramienta externa'}</span>
             <span class="cp-tag cp-tag-topic">${escapar(CATEGORIAS[herramienta.categoria])}</span>
+            ${herramienta.tipo === 'guia' ? '<span class="cp-tag cp-tag-type">Guía de consulta</span>' : ''}
           </div>
           <h3>${escapar(herramienta.nombre)}</h3>
           <p>${escapar(herramienta.descripcion)}</p>

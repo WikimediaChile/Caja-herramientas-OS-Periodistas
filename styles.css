@@ -1,8 +1,4 @@
-/* Caja de herramientas abiertas para periodistas · Wikimedia Chile / COALCO
-   Adaptación visual: noviembre de 2026
-   Pegar este archivo en la pestaña CSS de WordPress, sin etiquetas <style>.
-   Los estilos visuales se limitan a #caja-periodistas.
-*/
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 
@@ -110,6 +106,7 @@ body.admin-bar #caja-periodistas .cp-site-header { top: 32px; }
 #caja-periodistas .cp-tag { display: inline-flex; align-items: center; font-size: .69rem; font-weight: 700; line-height: 1.45; border-radius: 6px; padding: 5px 9px; background: #f3f4f6; color: #4b5563; }
 #caja-periodistas .cp-tag-wm { background: var(--cp-purple-soft); color: var(--cp-purple-dark); }
 #caja-periodistas .cp-tag-topic { border: 1px solid #e5e7eb; background: white; color: #64748b; }
+#caja-periodistas .cp-tag-type { background: #f9f9f0; color: #5b527a; }
 #caja-periodistas .cp-card h3 { font-size: 1.23rem; font-weight: 800; color: var(--cp-ink); }
 #caja-periodistas .cp-card > p { color: #4b5563; font-size: .92rem; line-height: 1.65; }
 #caja-periodistas .cp-card details { font-size: .9rem; margin-top: 3px; }
