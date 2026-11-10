@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Caja de herramientas abiertas para periodistas de Wikimedia Chile, programa COALCO.">
+  <title>Caja de herramientas abiertas para periodistas | Wikimedia Chile</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- INICIO HTML PARA WORDPRESS: copiar solamente el contenido entre los dos marcadores -->
+<div id="caja-periodistas" class="cp-root">
+  <header class="cp-site-header" id="cp-site-header">
+    <nav class="cp-site-nav cp-container" aria-label="Navegación principal">
+      <a class="cp-brand" href="https://wikimedia.cl/" aria-label="Wikimedia Chile — inicio">
+        <img src="https://wikimedia.cl/wp-content/uploads/2025/11/wikiemdia-foundation-logo.png" alt="Wikimedia Chile" width="180" height="36">
+      </a>
+      <div class="cp-nav-links">
+        <a href="https://wikimedia.cl/sobre-nosotros-wikimedia-chile/">Quiénes Somos</a>
+        <a href="https://wikimedia.cl/programas-wikimedia-chile/" aria-current="true">Programas</a>
+        <a href="https://wikimedia.cl/noticias-wikimedia-chile/">Noticias</a>
+        <a href="https://wikimedia.cl/blog-wikimedia-chile/">Blog</a>
+        <a href="https://wikimedia.cl/agenda-wikimedia-chile/">Agenda</a>
+      </div>
+      <div class="cp-nav-actions">
+        <a class="cp-nav-secondary" href="https://wikimedia.cl/socios/">Hazte Socio/a</a>
+        <a class="cp-nav-primary" href="https://wikimedia.cl/donar-wikimedia-chile/">Donar</a>
+      </div>
+      <button class="cp-mobile-toggle" id="cp-mobile-toggle" type="button" aria-label="Abrir menú" aria-controls="cp-mobile-menu" aria-expanded="false">
+        <svg aria-hidden="true" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <nav class="cp-mobile-menu" id="cp-mobile-menu" aria-label="Navegación móvil" hidden>
+    <div class="cp-mobile-heading">
+      <img src="https://wikimedia.cl/wp-content/uploads/2025/11/wikiemdia-foundation-logo.png" alt="Wikimedia Chile" width="180" height="36">
+      <button type="button" id="cp-mobile-close" aria-label="Cerrar menú">
+        <svg aria-hidden="true" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <a href="https://wikimedia.cl/">Inicio</a>
+    <a href="https://wikimedia.cl/sobre-nosotros-wikimedia-chile/">Quiénes Somos</a>
+    <a href="https://wikimedia.cl/programas-wikimedia-chile/">Programas</a>
+    <a href="https://wikimedia.cl/noticias-wikimedia-chile/">Noticias</a>
+    <a href="https://wikimedia.cl/blog-wikimedia-chile/">Blog</a>
+    <a href="https://wikimedia.cl/agenda-wikimedia-chile/">Agenda</a>
+    <div class="cp-mobile-actions">
+      <a class="cp-nav-secondary" href="https://wikimedia.cl/socios/">Hazte Socio/a</a>
+      <a class="cp-nav-primary" href="https://wikimedia.cl/donar-wikimedia-chile/">Donar</a>
+    </div>
+  </nav>
+
+  <main id="cp-main" class="cp-main">
+    <nav class="cp-breadcrumbs cp-container" aria-label="Ruta de navegación">
+      <ol>
+        <li><a href="https://wikimedia.cl/">Inicio</a></li>
+        <li><a href="https://wikimedia.cl/programas-wikimedia-chile/">Programas</a></li>
+        <li><a href="https://wikimedia.cl/comunicaciones-y-comunidad-coalco-wikimedia-chile/">COALCO</a></li>
+        <li aria-current="page">Caja de herramientas</li>
+      </ol>
+    </nav>
+
+    <section class="cp-hero" aria-labelledby="cp-title">
+      <div class="cp-container cp-hero-inner">
+        <span class="cp-eyebrow">Recursos para periodistas · COALCO</span>
+        <h1 id="cp-title">Caja de herramientas abiertas para periodistas</h1>
+        <p class="cp-lead">Recursos del ecosistema Wikimedia y aliados libres para orientarte, rastrear el origen de la información, encontrar datos y contar mejor tu historia. Busca y filtra para encontrar lo que necesitas.</p>
+        <label class="cp-search" for="cp-q">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <span class="cp-sr-only">Buscar herramientas</span>
+          <input id="cp-q" type="search" placeholder="Prueba con «autoría», «imágenes» o «archivo»" autocomplete="off">
+        </label>
+      </div>
+    </section>
+
+    <section class="cp-catalog" aria-labelledby="cp-catalog-title">
+      <div class="cp-container">
+        <div class="cp-section-heading">
+          <span class="cp-eyebrow">Herramientas disponibles</span>
+          <h2 id="cp-catalog-title">Explora los recursos</h2>
+          <p>Filtra por el tipo de tarea que necesitas realizar o busca una herramienta específica.</p>
+        </div>
+        <div class="cp-filter-bar">
+          <div class="cp-chips" id="cp-chips" role="group" aria-label="Filtrar herramientas por categoría"></div>
+        </div>
+        <p class="cp-count" id="cp-count" role="status" aria-live="polite"></p>
+        <div class="cp-grid" id="cp-grid"></div>
+      </div>
+    </section>
+
+    <section class="cp-contribute" id="cp-contribuye" aria-labelledby="cp-contribuye-title">
+      <div class="cp-container">
+        <div class="cp-cta">
+          <div>
+            <span class="cp-cta-eyebrow">Construyamos esta caja en comunidad</span>
+            <h2 id="cp-contribuye-title">Súmate a la caja</h2>
+            <p>¿Conoces otro recurso del ecosistema Wikimedia, o una herramienta abierta o de código abierto, que pueda servirle a periodistas? Cuéntanos y lo sumamos a esta caja.</p>
+          </div>
+          <a class="cp-cta-button" href="mailto:comunicaciones@wikimediachile.cl?subject=Sugerencia%20de%20recurso%20para%20la%20caja%20de%20herramientas">Sugerir una herramienta <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="cp-note">Recurso de Wikimedia Chile para periodistas. Puede compartirse y adaptarse con atribución. Algunas herramientas son experimentales o pueden cambiar con el tiempo: verifica su disponibilidad antes de usarlas.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página basado en la página de recursos de wikimedia.cl -->
+  <footer class="cp-footer">
+    <div class="cp-container">
+      <div class="cp-footer-grid">
+        <div class="cp-footer-about">
+          <a href="https://wikimedia.cl/" aria-label="Wikimedia Chile — inicio">
+            <img src="https://wikimedia.cl/wp-content/uploads/2025/11/wikimedia-chile-logo.png" alt="Wikimedia Chile" width="180" height="36">
+          </a>
+          <p>Promoviendo el conocimiento libre y la cultura abierta en Chile como el capítulo local de la Fundación Wikimedia.</p>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <a href="https://wikimedia.cl/sobre-nosotros-wikimedia-chile/">Quiénes Somos</a>
+          <a href="https://wikimedia.cl/programas-wikimedia-chile/">Programas</a>
+          <a href="https://wikimedia.cl/noticias-wikimedia-chile/">Noticias</a>
+          <a href="https://wikimedia.cl/blog-wikimedia-chile/">Blog</a>
+          <a href="https://wikimedia.cl/agenda-wikimedia-chile/">Agenda</a>
+          <a href="https://wikimedia.cl/socios/">Hazte Socio/a</a>
+        </div>
+        <div>
+          <h3>Enlaces útiles</h3>
+          <a href="https://wikimedia.cl/memorias-anuales-wikimedia-chile/">Memorias anuales</a>
+          <a href="https://wikimedia.cl/transparencia-wikimedia-chile/">Transparencia</a>
+          <a href="https://wikimedia.cl/estatutos-wikimedia-chile/">Estatutos</a>
+        </div>
+        <div>
+          <h3>Contacto</h3>
+          <a href="mailto:contacto@wikimedia.cl">contacto@wikimedia.cl</a>
+          <div class="cp-socials">
+            <a href="https://www.instagram.com/wikimedia_cl/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Wikimedia Chile">Instagram ↗</a>
+            <a href="https://www.facebook.com/WikimediaCL/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Wikimedia Chile">Facebook ↗</a>
+            <a href="https://www.linkedin.com/company/wikimedia-chile/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Wikimedia Chile">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="cp-footer-bottom">
+        <span>Wikimedia Chile. Algunos derechos reservados.</span>
+        <span>El contenido está disponible bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> salvo que se indique lo contrario.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+  <!-- FIN HTML PARA WORDPRESS -->
+  <script src="./script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+/* Caja de herramientas abiertas para periodistas · Wikimedia Chile / COALCO
+   Adaptación visual: noviembre de 2026
+   Pegar este archivo en la pestaña CSS de WordPress, sin etiquetas <style>.
+   Los estilos visuales se limitan a #caja-periodistas.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+
+body:has(#caja-periodistas) #masthead,
+body:has(#caja-periodistas) #colophon,
+body:has(#caja-periodistas) .site-header,
+body:has(#caja-periodistas) .site-footer,
+body.wmcl-caja-page #masthead,
+body.wmcl-caja-page #colophon,
+body.wmcl-caja-page .site-header,
+body.wmcl-caja-page .site-footer { display: none !important; }
+body:has(#caja-periodistas) .entry-header,
+body:has(#caja-periodistas) .wp-block-post-title,
+body.wmcl-caja-page .entry-header,
+body.wmcl-caja-page .wp-block-post-title { display: none !important; }
+body:has(#caja-periodistas), body.wmcl-caja-page { overflow-x: clip; }
+
+#caja-periodistas {
+  --cp-purple: #5748b5;
+  --cp-purple-dark: #473994;
+  --cp-purple-soft: #f3f0ff;
+  --cp-ink: #111827;
+  --cp-muted: #4b5563;
+  --cp-soft: #f9f9f0;
+  --cp-line: #e5e7eb;
+  --cp-card: #fff;
+  font: 400 16px/1.6 'Inter', Arial, sans-serif;
+  color: var(--cp-ink);
+  background: #fff;
+  position: relative;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  isolation: isolate;
+  text-align: left;
+}
+#caja-periodistas, #caja-periodistas *, #caja-periodistas *::before, #caja-periodistas *::after { box-sizing: border-box; }
+#caja-periodistas [hidden] { display: none !important; }
+#caja-periodistas a { text-decoration: none; }
+#caja-periodistas button, #caja-periodistas input { font: inherit; }
+#caja-periodistas :is(a, button, input, summary):focus-visible { outline: 3px solid var(--cp-purple); outline-offset: 3px; }
+#caja-periodistas p { margin: 0; }
+#caja-periodistas h1, #caja-periodistas h2, #caja-periodistas h3 { font-family: 'Inter', Arial, sans-serif; line-height: 1.15; letter-spacing: -.025em; margin: 0; }
+#caja-periodistas .cp-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+#caja-periodistas .cp-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Cabecera y navegación institucional */
+#caja-periodistas .cp-site-header { position: fixed; inset: 0 0 auto 0; z-index: 9998; background: #fff; box-shadow: 0 4px 14px rgba(17,24,39,.09); min-height: 80px; }
+body.admin-bar #caja-periodistas .cp-site-header { top: 32px; }
+#caja-periodistas .cp-site-nav { height: 80px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+#caja-periodistas .cp-brand { flex: 1; min-width: 0; display: flex; align-items: center; }
+#caja-periodistas .cp-brand img { max-width: 170px; width: auto; height: 36px; object-fit: contain; }
+#caja-periodistas .cp-nav-links { flex: 2; display: flex; align-items: center; justify-content: center; gap: clamp(12px,2.15vw,30px); }
+#caja-periodistas .cp-nav-links a { color: #4b5563; font-weight: 500; white-space: nowrap; font-size: .94rem; }
+#caja-periodistas .cp-nav-links a:hover, #caja-periodistas .cp-nav-links a[aria-current] { color: var(--cp-purple); }
+#caja-periodistas .cp-nav-actions { display: flex; justify-content: flex-end; flex: 1; align-items: center; gap: 10px; }
+#caja-periodistas .cp-nav-actions a, #caja-periodistas .cp-mobile-actions a { border-radius: 9px; font-size: .85rem; font-weight: 700; padding: 9px 15px; white-space: nowrap; transition: background .2s ease; }
+#caja-periodistas .cp-nav-secondary { color: var(--cp-purple); border: 2px solid #e5e7eb; }
+#caja-periodistas .cp-nav-secondary:hover { background: #f3f4f6; }
+#caja-periodistas .cp-nav-primary { background: var(--cp-purple); border: 2px solid var(--cp-purple); color: white; }
+#caja-periodistas .cp-nav-primary:hover { background: var(--cp-purple-dark); }
+#caja-periodistas .cp-mobile-toggle { display: none; align-items: center; justify-content: center; background: transparent; border: 0; color: #374151; padding: 7px; cursor: pointer; }
+#caja-periodistas .cp-mobile-menu { position: fixed; inset: 0; z-index: 9999; background: white; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
+#caja-periodistas .cp-mobile-menu .cp-mobile-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+#caja-periodistas .cp-mobile-heading img { width: auto; height: 36px; max-width: 180px; }
+#caja-periodistas .cp-mobile-heading button { background: none; border: 0; padding: 8px; cursor: pointer; }
+#caja-periodistas .cp-mobile-menu > a { color: #374151; font-weight: 600; font-size: 1.16rem; padding: 4px 0; }
+#caja-periodistas .cp-mobile-actions { border-top: 1px solid var(--cp-line); padding-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+#caja-periodistas .cp-mobile-actions a { text-align: center; }
+
+/* Ruta y portada */
+#caja-periodistas .cp-main { padding-top: 80px; }
+#caja-periodistas .cp-breadcrumbs { padding-top: 30px; padding-bottom: 25px; }
+#caja-periodistas .cp-breadcrumbs ol { list-style: none; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; padding: 0; margin: 0; }
+#caja-periodistas .cp-breadcrumbs li { color: var(--cp-purple); font-weight: 700; font-size: .84rem; }
+#caja-periodistas .cp-breadcrumbs li:not(:last-child)::after { content: '/'; margin-left: 10px; color: #c1c5ce; font-weight: 400; }
+#caja-periodistas .cp-breadcrumbs a { color: #6b7280; font-weight: 500; }
+#caja-periodistas .cp-breadcrumbs a:hover { color: var(--cp-purple); }
+#caja-periodistas .cp-hero { background: radial-gradient(circle at 12% 18%, rgba(87,72,181,.08), transparent 33%), radial-gradient(circle at 88% 20%, rgba(240,188,0,.12),transparent 35%), linear-gradient(#fff, var(--cp-soft)); padding: 34px 0 78px; }
+#caja-periodistas .cp-hero-inner { text-align: center; max-width: 950px; }
+#caja-periodistas .cp-eyebrow { display: inline-block; color: var(--cp-purple); text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 800; }
+#caja-periodistas .cp-hero h1 { max-width: 850px; margin: 15px auto 0; color: var(--cp-ink); font-size: clamp(2.1rem,5vw,3.5rem); font-weight: 800; }
+#caja-periodistas .cp-hero .cp-lead { color: #4b5563; font-size: clamp(1rem,1.65vw,1.16rem); line-height: 1.8; margin: 22px auto 0; max-width: 780px; }
+#caja-periodistas .cp-search { background: #fff; border: 1.5px solid #d1d5db; box-shadow: 0 7px 20px rgba(31,41,55,.07); border-radius: 13px; min-height: 60px; display: flex; align-items: center; gap: 13px; padding: 10px 18px; margin: 32px auto 0; max-width: 670px; color: #6b7280; cursor: text; text-align: left; }
+#caja-periodistas .cp-search:focus-within { border-color: var(--cp-purple); box-shadow: 0 0 0 3px rgba(87,72,181,.11); }
+#caja-periodistas .cp-search input { border: 0; outline: 0; box-shadow: none; width: 100%; min-width: 0; padding: 0; background: transparent; color: var(--cp-ink); font-size: .96rem; }
+#caja-periodistas .cp-search input:focus { outline: 0; }
+#caja-periodistas .cp-search input::placeholder { color: #808897; opacity: 1; }
+
+/* Catálogo: tarjetas similares a .resource-card de la página de recursos */
+#caja-periodistas .cp-catalog { padding: 66px 0 80px; background-color: #fff; }
+#caja-periodistas .cp-section-heading { text-align: center; max-width: 780px; margin: 0 auto 32px; }
+#caja-periodistas .cp-section-heading h2 { color: var(--cp-ink); font-size: clamp(1.7rem,3.4vw,2.45rem); font-weight: 800; margin: 10px 0 14px; }
+#caja-periodistas .cp-section-heading p { font-size: 1.02rem; color: var(--cp-muted); }
+#caja-periodistas .cp-filter-bar { padding: 0 0 16px; }
+#caja-periodistas .cp-chips { display: flex; justify-content: center; gap: 9px; flex-wrap: wrap; }
+#caja-periodistas .cp-chip { background: #fff; color: #374151; border: 1px solid #d1d5db; border-radius: 99px; font: 600 .83rem/1.35 'Inter',Arial,sans-serif; padding: 10px 14px; cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+#caja-periodistas .cp-chip:hover { background: #f9f9fc; border-color: #b8aeeb; }
+#caja-periodistas .cp-chip[aria-pressed="true"] { color: white; background: var(--cp-purple); border-color: var(--cp-purple); }
+#caja-periodistas .cp-count { color: #6b7280; font-size: .88rem; margin: 18px 0 18px; }
+#caja-periodistas .cp-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; }
+#caja-periodistas .cp-card { border: 1px solid var(--cp-line); border-radius: 20px; padding: 24px; background: var(--cp-card); box-shadow: 0 8px 20px -14px rgba(15,23,42,.35); transition: transform .22s ease, box-shadow .22s ease; display: flex; flex-direction: column; gap: 13px; }
+#caja-periodistas .cp-card:hover { transform: translateY(-4px); box-shadow: 0 18px 30px -18px rgba(15,23,42,.35); }
+#caja-periodistas .cp-card-meta { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; }
+#caja-periodistas .cp-tag { display: inline-flex; align-items: center; font-size: .69rem; font-weight: 700; line-height: 1.45; border-radius: 6px; padding: 5px 9px; background: #f3f4f6; color: #4b5563; }
+#caja-periodistas .cp-tag-wm { background: var(--cp-purple-soft); color: var(--cp-purple-dark); }
+#caja-periodistas .cp-tag-topic { border: 1px solid #e5e7eb; background: white; color: #64748b; }
+#caja-periodistas .cp-card h3 { font-size: 1.23rem; font-weight: 800; color: var(--cp-ink); }
+#caja-periodistas .cp-card > p { color: #4b5563; font-size: .92rem; line-height: 1.65; }
+#caja-periodistas .cp-card details { font-size: .9rem; margin-top: 3px; }
+#caja-periodistas .cp-card summary { color: var(--cp-purple); font-weight: 700; cursor: pointer; }
+#caja-periodistas .cp-card details p { color: #374151; margin: 9px 0 0; line-height: 1.65; }
+#caja-periodistas .cp-card-actions { display: flex; margin-top: auto; padding-top: 12px; }
+#caja-periodistas .cp-tool-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--cp-purple); color: white; border: 1px solid var(--cp-purple); font-size: .87rem; font-weight: 700; padding: 10px 16px; border-radius: 10px; transition: background .2s ease; }
+#caja-periodistas .cp-tool-link:hover { background: var(--cp-purple-dark); color: #fff; }
+#caja-periodistas .cp-empty { grid-column: 1/-1; background: var(--cp-soft); border: 1px dashed #d1d5db; border-radius: 14px; padding: 28px; text-align: center; color: #4b5563; }
+
+/* Llamado a contribuir */
+#caja-periodistas .cp-contribute { padding: 0 0 76px; background: #fff; }
+#caja-periodistas .cp-cta { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; padding: 38px 42px; border-radius: 24px; background: linear-gradient(125deg,#5748b5,#315fba); color: #fff; }
+#caja-periodistas .cp-cta-eyebrow { display: block; font-size: .71rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: #ebe7ff; }
+#caja-periodistas .cp-cta h2 { color: #fff; font-size: clamp(1.55rem,2.8vw,2.1rem); margin: 8px 0 12px; font-weight: 800; }
+#caja-periodistas .cp-cta p { color: #f5f3ff; font-size: .96rem; line-height: 1.75; max-width: 680px; }
+#caja-periodistas .cp-cta-button { display: inline-flex; justify-content: center; align-items: center; gap: 12px; white-space: nowrap; background: white; color: var(--cp-purple); padding: 14px 19px; border-radius: 11px; font-size: .87rem; font-weight: 800; }
+#caja-periodistas .cp-cta-button:hover { background: #f9f9f0; color: var(--cp-purple-dark); }
+#caja-periodistas .cp-note { max-width: 920px; margin: 23px auto 0; text-align: center; color: #6b7280; font-size: .82rem; }
+
+/* Pie institucional */
+#caja-periodistas .cp-footer { background: #111827; color: #d1d5db; padding: 64px 0 30px; }
+#caja-periodistas .cp-footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 42px; }
+#caja-periodistas .cp-footer-about img { filter: brightness(0) invert(1); height: 37px; width: auto; max-width: 190px; object-fit: contain; }
+#caja-periodistas .cp-footer-about p { max-width: 270px; color: #9ca3af; font-size: .86rem; margin-top: 16px; }
+#caja-periodistas .cp-footer h3 { font-size: .91rem; font-weight: 700; color: white; margin: 2px 0 18px; letter-spacing: 0; }
+#caja-periodistas .cp-footer-grid > div:not(:first-child) > a { display: block; margin-bottom: 12px; font-size: .86rem; color: #9ca3af; }
+#caja-periodistas .cp-footer-grid a:hover, #caja-periodistas .cp-footer-bottom a:hover { color: white; }
+#caja-periodistas .cp-socials { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 12px; }
+#caja-periodistas .cp-socials a { color: #d1d5db; font-size: .76rem; }
+#caja-periodistas .cp-footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid #374151; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 20px; color: #9ca3af; font-size: .79rem; }
+#caja-periodistas .cp-footer-bottom a { color: #d1d5db; text-decoration: underline; }
+
+@media (max-width: 1050px) {
+  #caja-periodistas .cp-nav-links, #caja-periodistas .cp-nav-actions { display: none; }
+  #caja-periodistas .cp-mobile-toggle { display: inline-flex; }
+  #caja-periodistas .cp-site-nav { gap: 14px; }
+  #caja-periodistas .cp-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #caja-periodistas .cp-footer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 32px; }
+}
+@media (max-width: 680px) {
+  #caja-periodistas .cp-container { padding: 0 18px; }
+  #caja-periodistas .cp-site-header { min-height: 70px; }
+  #caja-periodistas .cp-site-nav { height: 70px; }
+  #caja-periodistas .cp-main { padding-top: 70px; }
+  #caja-periodistas .cp-breadcrumbs { padding-top: 18px; padding-bottom: 18px; }
+  #caja-periodistas .cp-breadcrumbs li { font-size: .72rem; }
+  #caja-periodistas .cp-hero { padding: 26px 0 58px; }
+  #caja-periodistas .cp-hero h1 { font-size: clamp(2rem,9vw,2.65rem); }
+  #caja-periodistas .cp-hero .cp-lead { font-size: .96rem; }
+  #caja-periodistas .cp-search { margin-top: 24px; min-height: 55px; }
+  #caja-periodistas .cp-catalog { padding: 50px 0 58px; }
+  #caja-periodistas .cp-chips { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding: 2px 2px 12px; scrollbar-width: thin; }
+  #caja-periodistas .cp-chip { flex: none; }
+  #caja-periodistas .cp-grid { grid-template-columns: 1fr; gap: 16px; }
+  #caja-periodistas .cp-card { padding: 20px; }
+  #caja-periodistas .cp-cta { padding: 30px 24px; grid-template-columns: 1fr; gap: 23px; }
+  #caja-periodistas .cp-cta-button { width: 100%; white-space: normal; }
+  #caja-periodistas .cp-contribute { padding-bottom: 54px; }
+  #caja-periodistas .cp-footer { padding: 49px 0 28px; }
+  #caja-periodistas .cp-footer-grid { grid-template-columns: 1fr; gap: 25px; }
+  #caja-periodistas .cp-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 782px) { body.admin-bar #caja-periodistas .cp-site-header { top: 46px; } }
+@media (prefers-reduced-motion: reduce) {
+  #caja-periodistas *, #caja-periodistas *::before, #caja-periodistas *::after { scroll-behavior: auto !important; transition: none !important; }
+}
